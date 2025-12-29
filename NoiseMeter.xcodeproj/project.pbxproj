@@ -1,0 +1,503 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1879E85BE3644AEC6C12267C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08051BEB26ED5BA5CAC531 /* DataManager.swift */; };
+		5E1431CF96F258B7ED25E493 /* NoiseMeterWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2E737F433AB08973DCA48357 /* NoiseMeterWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76A8177908BC4EE497502900 /* NoiseMeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5208CD8E0ABB3873A20EC2D /* NoiseMeterApp.swift */; };
+		77902FAB236A3A06B6274FDC /* SessionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F514D0C68D7D858B2AD04 /* SessionHistoryView.swift */; };
+		8FF5B7B7B2EA721C06506FF5 /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701337571374CD2A7C5353BE /* GaugeView.swift */; };
+		9043AF65A910A1A81D63E65F /* HistoryGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676430A1320025497149B7E6 /* HistoryGraphView.swift */; };
+		97282376EFBB21846B4BC02B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353CE8E4F7181B2591974E7 /* ContentView.swift */; };
+		9FC21674AFCCF11ED82E9F13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E05F720F7348099DA39D13CC /* Assets.xcassets */; };
+		A72C2414A51243FD7D570D0A /* NoiseMeterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389D0331E04B32CFB22184A7 /* NoiseMeterWidget.swift */; };
+		B1C4A47A770AEBF2451606BA /* AlertSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB29CE5490734FDD6DA7B56 /* AlertSettingsView.swift */; };
+		BD4B9C58FB144ED7E41D84B2 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD426CBD674805599319A49C /* AudioManager.swift */; };
+		D3BF419C9BC0F57B0841CE10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6F4AB429CC46F2CE0DDAC9C /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D334D5B81DB580B55EA67E0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 899AA39A74663AD0081BE7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F325E73284119C812DCEBA30;
+			remoteInfo = NoiseMeterWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F3AE43865A7BD4160C94E7C4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5E1431CF96F258B7ED25E493 /* NoiseMeterWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		196246439605A2F82EDB12D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1E3F514D0C68D7D858B2AD04 /* SessionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryView.swift; sourceTree = "<group>"; };
+		258BA8EE76F2CE95132FD060 /* NoiseMeter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NoiseMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB29CE5490734FDD6DA7B56 /* AlertSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingsView.swift; sourceTree = "<group>"; };
+		2E737F433AB08973DCA48357 /* NoiseMeterWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = NoiseMeterWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		389D0331E04B32CFB22184A7 /* NoiseMeterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMeterWidget.swift; sourceTree = "<group>"; };
+		676430A1320025497149B7E6 /* HistoryGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGraphView.swift; sourceTree = "<group>"; };
+		701337571374CD2A7C5353BE /* GaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
+		A5208CD8E0ABB3873A20EC2D /* NoiseMeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMeterApp.swift; sourceTree = "<group>"; };
+		AD426CBD674805599319A49C /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		CF08051BEB26ED5BA5CAC531 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D353CE8E4F7181B2591974E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D6F4AB429CC46F2CE0DDAC9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E05F720F7348099DA39D13CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		4F214254EC36E4C90576E72F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				675EE14B8355751D09974551 /* App */,
+				D31D161A033747CCD11AB166 /* Managers */,
+				97AB5559F57E67F32376CBB7 /* Views */,
+			);
+			name = Sources;
+			path = NoiseMeter/Sources;
+			sourceTree = "<group>";
+		};
+		675EE14B8355751D09974551 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A5208CD8E0ABB3873A20EC2D /* NoiseMeterApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8C77B255C1B12C262C91B218 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				258BA8EE76F2CE95132FD060 /* NoiseMeter.app */,
+				2E737F433AB08973DCA48357 /* NoiseMeterWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		97AB5559F57E67F32376CBB7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BB29CE5490734FDD6DA7B56 /* AlertSettingsView.swift */,
+				D353CE8E4F7181B2591974E7 /* ContentView.swift */,
+				701337571374CD2A7C5353BE /* GaugeView.swift */,
+				676430A1320025497149B7E6 /* HistoryGraphView.swift */,
+				1E3F514D0C68D7D858B2AD04 /* SessionHistoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C5F17090B9DBC62939938785 = {
+			isa = PBXGroup;
+			children = (
+				E852F18207918D37BEDA816F /* NoiseMeter */,
+				E768CE19518E05AAFFD46C61 /* NoiseMeterWidget */,
+				4F214254EC36E4C90576E72F /* Sources */,
+				8C77B255C1B12C262C91B218 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D31D161A033747CCD11AB166 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				AD426CBD674805599319A49C /* AudioManager.swift */,
+				CF08051BEB26ED5BA5CAC531 /* DataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E768CE19518E05AAFFD46C61 /* NoiseMeterWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D6F4AB429CC46F2CE0DDAC9C /* Assets.xcassets */,
+				196246439605A2F82EDB12D6 /* Info.plist */,
+				389D0331E04B32CFB22184A7 /* NoiseMeterWidget.swift */,
+			);
+			path = NoiseMeterWidget;
+			sourceTree = "<group>";
+		};
+		E852F18207918D37BEDA816F /* NoiseMeter */ = {
+			isa = PBXGroup;
+			children = (
+				E05F720F7348099DA39D13CC /* Assets.xcassets */,
+			);
+			path = NoiseMeter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8C43D5F87F5C5D30B7812BBE /* NoiseMeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4B8176E8586B68EA9F2BF9F /* Build configuration list for PBXNativeTarget "NoiseMeter" */;
+			buildPhases = (
+				9EB854CD00AF12B9E3AA9DD4 /* Sources */,
+				EC0FF9000E23BEDE708B7357 /* Resources */,
+				F3AE43865A7BD4160C94E7C4 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				852A1579A0456990DFBC95F9 /* PBXTargetDependency */,
+			);
+			name = NoiseMeter;
+			packageProductDependencies = (
+			);
+			productName = NoiseMeter;
+			productReference = 258BA8EE76F2CE95132FD060 /* NoiseMeter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F325E73284119C812DCEBA30 /* NoiseMeterWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD2E244B7CAEE8F8E36FB97D /* Build configuration list for PBXNativeTarget "NoiseMeterWidgetExtension" */;
+			buildPhases = (
+				26E3DBE71E0A41371B6F58AD /* Sources */,
+				FE5701C420D709AC2B710A39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NoiseMeterWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = NoiseMeterWidgetExtension;
+			productReference = 2E737F433AB08973DCA48357 /* NoiseMeterWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		899AA39A74663AD0081BE7B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					8C43D5F87F5C5D30B7812BBE = {
+						DevelopmentTeam = BAMVK6LBVP;
+						ProvisioningStyle = Automatic;
+					};
+					F325E73284119C812DCEBA30 = {
+						DevelopmentTeam = BAMVK6LBVP;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7C86E2C9DC2E41F024E781F0 /* Build configuration list for PBXProject "NoiseMeter" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C5F17090B9DBC62939938785;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C43D5F87F5C5D30B7812BBE /* NoiseMeter */,
+				F325E73284119C812DCEBA30 /* NoiseMeterWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC0FF9000E23BEDE708B7357 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FC21674AFCCF11ED82E9F13 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE5701C420D709AC2B710A39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3BF419C9BC0F57B0841CE10 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		26E3DBE71E0A41371B6F58AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72C2414A51243FD7D570D0A /* NoiseMeterWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EB854CD00AF12B9E3AA9DD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1C4A47A770AEBF2451606BA /* AlertSettingsView.swift in Sources */,
+				BD4B9C58FB144ED7E41D84B2 /* AudioManager.swift in Sources */,
+				97282376EFBB21846B4BC02B /* ContentView.swift in Sources */,
+				1879E85BE3644AEC6C12267C /* DataManager.swift in Sources */,
+				8FF5B7B7B2EA721C06506FF5 /* GaugeView.swift in Sources */,
+				9043AF65A910A1A81D63E65F /* HistoryGraphView.swift in Sources */,
+				76A8177908BC4EE497502900 /* NoiseMeterApp.swift in Sources */,
+				77902FAB236A3A06B6274FDC /* SessionHistoryView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		852A1579A0456990DFBC95F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F325E73284119C812DCEBA30 /* NoiseMeterWidgetExtension */;
+			targetProxy = D334D5B81DB580B55EA67E0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		37AC42D7132280F8F1B190BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NoiseMeter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4990BA73A4F7581CDE04DFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BAMVK6LBVP;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		654AA61C924153C2807A52AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NoiseMeterWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8612B74293183D77E246C492 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NoiseMeter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		898458A7BD6BEB6512CAB256 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NoiseMeterWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F4D3D3CF1A1CDD1DC1E2A8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BAMVK6LBVP;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7C86E2C9DC2E41F024E781F0 /* Build configuration list for PBXProject "NoiseMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F4D3D3CF1A1CDD1DC1E2A8F /* Debug */,
+				4990BA73A4F7581CDE04DFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AD2E244B7CAEE8F8E36FB97D /* Build configuration list for PBXNativeTarget "NoiseMeterWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				898458A7BD6BEB6512CAB256 /* Debug */,
+				654AA61C924153C2807A52AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F4B8176E8586B68EA9F2BF9F /* Build configuration list for PBXNativeTarget "NoiseMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AC42D7132280F8F1B190BF /* Debug */,
+				8612B74293183D77E246C492 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 899AA39A74663AD0081BE7B0 /* Project object */;
+}
