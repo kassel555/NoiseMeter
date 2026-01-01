@@ -2,34 +2,20 @@ import Foundation
 
 struct NoiseSession: Identifiable, Codable {
     let id: UUID
-    let startDate: Date
-    var endDate: Date?
+    let startTime: Date
+    var endTime: Date?
     var readings: [SavedReading]
-    var alertCount: Int
     var alertThreshold: Float
+    var alertCount: Int
+
+    struct SavedReading: Codable {
+        let timestamp: Date
+        let decibels: Float
+    }
 
     var duration: TimeInterval {
-        let end = endDate ?? Date()
-        return end.timeIntervalSince(startDate)
-    }
-
-    var formattedDuration: String {
-        let duration = Int(self.duration)
-        let hours = duration / 3600
-        let minutes = (duration % 3600) / 60
-        let seconds = duration % 60
-
-        if hours > 0 {
-            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
-        }
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-
-    var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: startDate)
+        guard let end = endTime else { return 0 }
+        return end.timeIntervalSince(startTime)
     }
 
     var averageDecibels: Float {
@@ -46,56 +32,37 @@ struct NoiseSession: Identifiable, Codable {
         readings.map { $0.decibels }.max() ?? 0
     }
 
-    var peakDecibels: Float {
-        readings.map { $0.decibels }.max() ?? 0
+    var formattedDuration: String {
+        let dur = Int(duration)
+        let hours = dur / 3600
+        let minutes = (dur % 3600) / 60
+        let seconds = dur % 60
+
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        }
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
-struct SavedReading: Identifiable, Codable {
-    let id: UUID
-    let timestamp: Date
-    let decibels: Float
-
-    init(from reading: NoiseReading) {
-        self.id = reading.id
-        self.timestamp = reading.timestamp
-        self.decibels = reading.decibels
-    }
-
-    init(id: UUID = UUID(), timestamp: Date, decibels: Float) {
-        self.id = id
-        self.timestamp = timestamp
-        self.decibels = decibels
-    }
-}
-
-class DataManager: ObservableObject {
+class DataManager {
     static let shared = DataManager()
 
-    @Published var sessions: [NoiseSession] = []
-
     private let sessionsKey = "noise_sessions"
-    private let fileManager = FileManager.default
+    private var sessions: [NoiseSession] = []
 
-    private var sessionsFileURL: URL {
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return documentsPath.appendingPathComponent("noise_sessions.json")
-    }
-
-    init() {
+    private init() {
         loadSessions()
     }
-
-    // MARK: - Session Management
 
     func createSession(alertThreshold: Float) -> NoiseSession {
         let session = NoiseSession(
             id: UUID(),
-            startDate: Date(),
-            endDate: nil,
+            startTime: Date(),
+            endTime: nil,
             readings: [],
-            alertCount: 0,
-            alertThreshold: alertThreshold
+            alertThreshold: alertThreshold,
+            alertCount: 0
         )
         sessions.insert(session, at: 0)
         saveSessions()
@@ -104,19 +71,25 @@ class DataManager: ObservableObject {
 
     func updateSession(id: UUID, readings: [NoiseReading], alertCount: Int) {
         guard let index = sessions.firstIndex(where: { $0.id == id }) else { return }
-
-        sessions[index].readings = readings.map { SavedReading(from: $0) }
+        sessions[index].readings = readings.map {
+            NoiseSession.SavedReading(timestamp: $0.timestamp, decibels: $0.decibels)
+        }
         sessions[index].alertCount = alertCount
         saveSessions()
     }
 
     func endSession(id: UUID, readings: [NoiseReading], alertCount: Int) {
         guard let index = sessions.firstIndex(where: { $0.id == id }) else { return }
-
-        sessions[index].endDate = Date()
-        sessions[index].readings = readings.map { SavedReading(from: $0) }
+        sessions[index].endTime = Date()
+        sessions[index].readings = readings.map {
+            NoiseSession.SavedReading(timestamp: $0.timestamp, decibels: $0.decibels)
+        }
         sessions[index].alertCount = alertCount
         saveSessions()
+    }
+
+    func getSessions() -> [NoiseSession] {
+        return sessions.filter { $0.endTime != nil }
     }
 
     func deleteSession(id: UUID) {
@@ -124,30 +97,16 @@ class DataManager: ObservableObject {
         saveSessions()
     }
 
-    func deleteAllSessions() {
-        sessions.removeAll()
-        saveSessions()
-    }
-
-    // MARK: - Persistence
-
     private func saveSessions() {
-        do {
-            let data = try JSONEncoder().encode(sessions)
-            try data.write(to: sessionsFileURL)
-        } catch {
-            print("Failed to save sessions: \(error)")
+        if let encoded = try? JSONEncoder().encode(sessions) {
+            UserDefaults.standard.set(encoded, forKey: sessionsKey)
         }
     }
 
     private func loadSessions() {
-        guard fileManager.fileExists(atPath: sessionsFileURL.path) else { return }
-
-        do {
-            let data = try Data(contentsOf: sessionsFileURL)
-            sessions = try JSONDecoder().decode([NoiseSession].self, from: data)
-        } catch {
-            print("Failed to load sessions: \(error)")
+        if let data = UserDefaults.standard.data(forKey: sessionsKey),
+           let decoded = try? JSONDecoder().decode([NoiseSession].self, from: data) {
+            sessions = decoded
         }
     }
 }

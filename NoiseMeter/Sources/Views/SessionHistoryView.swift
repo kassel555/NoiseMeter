@@ -2,111 +2,105 @@ import SwiftUI
 import Charts
 
 struct SessionHistoryView: View {
-    @ObservedObject var dataManager = DataManager.shared
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedSession: NoiseSession?
+    @State private var sessions: [NoiseSession] = []
 
     var body: some View {
-        NavigationView {
-            Group {
-                if dataManager.sessions.isEmpty {
-                    emptyState
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+
+                if sessions.isEmpty {
+                    VStack(spacing: 16) {
+                        Image(systemName: "chart.line.downtrend.xyaxis")
+                            .font(.system(size: 60))
+                            .foregroundColor(.gray)
+
+                        Text("No Sessions Yet")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+
+                        Text("Start monitoring to record noise data")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                 } else {
-                    sessionList
+                    List {
+                        ForEach(sessions) { session in
+                            NavigationLink(destination: SessionDetailView(session: session)) {
+                                SessionRowView(session: session)
+                            }
+                            .listRowBackground(Color.white.opacity(0.05))
+                        }
+                        .onDelete(perform: deleteSession)
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
             }
             .navigationTitle("History")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
                         dismiss()
                     }
+                    .foregroundColor(.blue)
                 }
 
-                if !dataManager.sessions.isEmpty {
-                    ToolbarItem(placement: .destructiveAction) {
-                        Button("Clear All", role: .destructive) {
-                            dataManager.deleteAllSessions()
-                        }
+                if !sessions.isEmpty {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                            .foregroundColor(.blue)
                     }
                 }
             }
-            .sheet(item: $selectedSession) { session in
-                SessionDetailView(session: session)
+            .onAppear {
+                sessions = DataManager.shared.getSessions()
             }
         }
-    }
-
-    private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "clock.arrow.circlepath")
-                .font(.system(size: 50))
-                .foregroundColor(.secondary)
-
-            Text("No Sessions Yet")
-                .font(.title2)
-                .fontWeight(.semibold)
-
-            Text("Start monitoring to record your first session.")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-        }
-    }
-
-    private var sessionList: some View {
-        List {
-            ForEach(dataManager.sessions) { session in
-                SessionRow(session: session)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        selectedSession = session
-                    }
-            }
-            .onDelete(perform: deleteSession)
-        }
-        .listStyle(.insetGrouped)
+        .preferredColorScheme(.dark)
     }
 
     private func deleteSession(at offsets: IndexSet) {
         for index in offsets {
-            dataManager.deleteSession(id: dataManager.sessions[index].id)
+            DataManager.shared.deleteSession(id: sessions[index].id)
         }
+        sessions = DataManager.shared.getSessions()
     }
 }
 
-struct SessionRow: View {
+struct SessionRowView: View {
     let session: NoiseSession
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(session.formattedDate)
+                Text(session.startTime, style: .date)
                     .font(.headline)
+                    .foregroundColor(.white)
 
                 Spacer()
 
-                Text(session.formattedDuration)
+                Text(session.startTime, style: .time)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.gray)
             }
 
             HStack(spacing: 16) {
-                StatPill(label: "Avg", value: "\(Int(session.averageDecibels))", unit: "dB", color: .blue)
-                StatPill(label: "Peak", value: "\(Int(session.peakDecibels))", unit: "dB", color: .red)
+                StatLabel(title: "Avg", value: String(format: "%.0f dB", session.averageDecibels), color: .blue)
+                StatLabel(title: "Max", value: String(format: "%.0f dB", session.maxDecibels), color: .orange)
+                StatLabel(title: "Duration", value: session.formattedDuration, color: .purple)
 
                 if session.alertCount > 0 {
-                    StatPill(label: "Alerts", value: "\(session.alertCount)", unit: "", color: .orange)
+                    StatLabel(title: "Alerts", value: "\(session.alertCount)", color: .red)
                 }
-
-                Spacer()
             }
 
             // Mini chart
             if !session.readings.isEmpty {
-                MiniChart(readings: session.readings)
+                MiniChartView(readings: session.readings)
                     .frame(height: 40)
             }
         }
@@ -114,52 +108,50 @@ struct SessionRow: View {
     }
 }
 
-struct StatPill: View {
-    let label: String
+struct StatLabel: View {
+    let title: String
     let value: String
-    let unit: String
     let color: Color
 
     var body: some View {
-        HStack(spacing: 4) {
-            Text(label)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
                 .font(.caption2)
-                .foregroundColor(.secondary)
-            Text(value + unit)
+                .foregroundColor(.gray)
+
+            Text(value)
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(color)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(color.opacity(0.1))
-        .cornerRadius(8)
     }
 }
 
-struct MiniChart: View {
-    let readings: [SavedReading]
+struct MiniChartView: View {
+    let readings: [NoiseSession.SavedReading]
 
     var body: some View {
-        Chart(readings) { reading in
-            AreaMark(
-                x: .value("Time", reading.timestamp),
-                y: .value("dB", reading.decibels)
-            )
-            .foregroundStyle(
-                LinearGradient(
-                    colors: [.blue.opacity(0.3), .blue.opacity(0.05)],
-                    startPoint: .top,
-                    endPoint: .bottom
+        Chart {
+            ForEach(Array(readings.enumerated()), id: \.offset) { index, reading in
+                AreaMark(
+                    x: .value("Index", index),
+                    y: .value("dB", reading.decibels)
                 )
-            )
+                .foregroundStyle(
+                    LinearGradient(
+                        gradient: Gradient(colors: [.blue.opacity(0.4), .blue.opacity(0.1)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
 
-            LineMark(
-                x: .value("Time", reading.timestamp),
-                y: .value("dB", reading.decibels)
-            )
-            .foregroundStyle(.blue)
-            .lineStyle(StrokeStyle(lineWidth: 1))
+                LineMark(
+                    x: .value("Index", index),
+                    y: .value("dB", reading.decibels)
+                )
+                .foregroundStyle(.blue)
+                .lineStyle(StrokeStyle(lineWidth: 1))
+            }
         }
         .chartYScale(domain: 0...120)
         .chartXAxis(.hidden)
@@ -169,159 +161,153 @@ struct MiniChart: View {
 
 struct SessionDetailView: View {
     let session: NoiseSession
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationView {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
             ScrollView {
                 VStack(spacing: 20) {
-                    // Header info
-                    VStack(spacing: 8) {
-                        Text(session.formattedDate)
-                            .font(.title2)
+                    // Header
+                    VStack(spacing: 4) {
+                        Text(session.startTime, style: .date)
+                            .font(.title)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
 
-                        Text("Duration: \(session.formattedDuration)")
+                        Text("\(session.startTime, style: .time) - \(session.endTime ?? Date(), style: .time)")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.gray)
                     }
                     .padding(.top)
 
-                    // Statistics
+                    // Stats grid
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
                         GridItem(.flexible())
-                    ], spacing: 16) {
-                        DetailStatCard(title: "Average", value: session.averageDecibels, color: .blue)
-                        DetailStatCard(title: "Peak", value: session.peakDecibels, color: .red)
-                        DetailStatCard(title: "Minimum", value: session.minDecibels, color: .green)
-                        DetailStatCard(title: "Maximum", value: session.maxDecibels, color: .orange)
+                    ], spacing: 12) {
+                        DetailStatBox(title: "Duration", value: session.formattedDuration, icon: "clock", color: .purple)
+                        DetailStatBox(title: "Readings", value: "\(session.readings.count)", icon: "waveform", color: .blue)
+                        DetailStatBox(title: "Average", value: String(format: "%.1f dB", session.averageDecibels), icon: "equal.circle", color: .cyan)
+                        DetailStatBox(title: "Peak", value: String(format: "%.1f dB", session.maxDecibels), icon: "arrow.up.circle", color: .orange)
+                        DetailStatBox(title: "Minimum", value: String(format: "%.1f dB", session.minDecibels), icon: "arrow.down.circle", color: .green)
+                        DetailStatBox(title: "Alerts", value: "\(session.alertCount)", icon: "bell", color: .red)
                     }
                     .padding(.horizontal)
-
-                    // Alert info
-                    if session.alertCount > 0 {
-                        HStack {
-                            Image(systemName: "bell.fill")
-                                .foregroundColor(.orange)
-                            Text("\(session.alertCount) alerts triggered")
-                                .foregroundColor(.secondary)
-                            Text("(threshold: \(Int(session.alertThreshold)) dB)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding()
-                        .background(Color.orange.opacity(0.1))
-                        .cornerRadius(12)
-                        .padding(.horizontal)
-                    }
 
                     // Full chart
                     if !session.readings.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Noise Level Over Time")
+                            Text("Noise History")
                                 .font(.headline)
+                                .foregroundColor(.white)
                                 .padding(.horizontal)
 
-                            DetailChart(readings: session.readings, threshold: session.alertThreshold)
+                            DetailChartView(readings: session.readings, threshold: session.alertThreshold)
                                 .frame(height: 200)
                                 .padding(.horizontal)
                         }
                     }
 
-                    // Reading count
-                    Text("\(session.readings.count) readings recorded")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.bottom)
-                }
-            }
-            .navigationTitle("Session Details")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
+                    Spacer()
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct DetailStatCard: View {
+struct DetailStatBox: View {
     let title: String
-    let value: Float
+    let value: String
+    let icon: String
     let color: Color
 
     var body: some View {
         VStack(spacing: 8) {
-            Text(title)
-                .font(.caption)
-                .foregroundColor(.secondary)
-
-            Text("\(Int(value))")
-                .font(.title)
-                .fontWeight(.bold)
+            Image(systemName: icon)
+                .font(.title2)
                 .foregroundColor(color)
 
-            Text("dB")
-                .font(.caption2)
-                .foregroundColor(.secondary)
+            Text(value)
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.gray)
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(color.opacity(0.1))
+        .background(Color.white.opacity(0.05))
         .cornerRadius(12)
     }
 }
 
-struct DetailChart: View {
-    let readings: [SavedReading]
+struct DetailChartView: View {
+    let readings: [NoiseSession.SavedReading]
     let threshold: Float
 
     var body: some View {
         Chart {
-            ForEach(readings) { reading in
-                LineMark(
-                    x: .value("Time", reading.timestamp),
-                    y: .value("dB", reading.decibels)
-                )
-                .foregroundStyle(.blue)
-                .lineStyle(StrokeStyle(lineWidth: 2))
-
+            ForEach(Array(readings.enumerated()), id: \.offset) { index, reading in
                 AreaMark(
-                    x: .value("Time", reading.timestamp),
+                    x: .value("Index", index),
                     y: .value("dB", reading.decibels)
                 )
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.blue.opacity(0.3), .blue.opacity(0.05)],
+                        gradient: Gradient(colors: [
+                            colorForLevel(reading.decibels).opacity(0.3),
+                            colorForLevel(reading.decibels).opacity(0.1)
+                        ]),
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
+
+                LineMark(
+                    x: .value("Index", index),
+                    y: .value("dB", reading.decibels)
+                )
+                .foregroundStyle(colorForLevel(reading.decibels))
+                .lineStyle(StrokeStyle(lineWidth: 2))
             }
 
-            // Threshold line
             RuleMark(y: .value("Threshold", threshold))
-                .foregroundStyle(.red.opacity(0.5))
-                .lineStyle(StrokeStyle(lineWidth: 1, dash: [5, 5]))
-                .annotation(position: .top, alignment: .trailing) {
-                    Text("Threshold")
-                        .font(.caption2)
-                        .foregroundColor(.red)
-                }
+                .foregroundStyle(.red.opacity(0.7))
+                .lineStyle(StrokeStyle(lineWidth: 1, dash: [5, 3]))
         }
         .chartYScale(domain: 0...120)
-        .chartYAxis {
-            AxisMarks(position: .leading, values: [0, 30, 60, 90, 120])
-        }
         .chartXAxis {
-            AxisMarks(values: .automatic(desiredCount: 4)) { value in
+            AxisMarks(values: .automatic(desiredCount: 5)) { _ in
                 AxisGridLine()
-                AxisValueLabel(format: .dateTime.hour().minute())
+                    .foregroundStyle(Color.gray.opacity(0.3))
             }
+        }
+        .chartYAxis {
+            AxisMarks(position: .leading, values: [0, 30, 60, 90, 120]) { value in
+                AxisGridLine()
+                    .foregroundStyle(Color.gray.opacity(0.3))
+                AxisValueLabel()
+                    .foregroundStyle(Color.gray)
+            }
+        }
+    }
+
+    private func colorForLevel(_ db: Float) -> Color {
+        switch db {
+        case 0..<30:
+            return .green
+        case 30..<50:
+            return .yellow
+        case 50..<70:
+            return .orange
+        case 70..<90:
+            return .red
+        default:
+            return .purple
         }
     }
 }

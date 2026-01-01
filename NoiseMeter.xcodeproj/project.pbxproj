@@ -17,11 +17,20 @@
 		9FC21674AFCCF11ED82E9F13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E05F720F7348099DA39D13CC /* Assets.xcassets */; };
 		A72C2414A51243FD7D570D0A /* NoiseMeterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389D0331E04B32CFB22184A7 /* NoiseMeterWidget.swift */; };
 		B1C4A47A770AEBF2451606BA /* AlertSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB29CE5490734FDD6DA7B56 /* AlertSettingsView.swift */; };
+		B6DA4761E80AC8C14D68A751 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A488C2C48A983C61618FB1A /* StatisticsView.swift */; };
 		BD4B9C58FB144ED7E41D84B2 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD426CBD674805599319A49C /* AudioManager.swift */; };
 		D3BF419C9BC0F57B0841CE10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6F4AB429CC46F2CE0DDAC9C /* Assets.xcassets */; };
+		EE5794465AB5D9808A444D95 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53FFE50DE03B8D14EB10156 /* ScreenshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0E8B7CE9D042D2318ADB0F86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 899AA39A74663AD0081BE7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C43D5F87F5C5D30B7812BBE;
+			remoteInfo = NoiseMeter;
+		};
 		D334D5B81DB580B55EA67E0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 899AA39A74663AD0081BE7B0 /* Project object */;
@@ -46,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A488C2C48A983C61618FB1A /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		196246439605A2F82EDB12D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1E3F514D0C68D7D858B2AD04 /* SessionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryView.swift; sourceTree = "<group>"; };
 		258BA8EE76F2CE95132FD060 /* NoiseMeter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NoiseMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,10 +64,12 @@
 		389D0331E04B32CFB22184A7 /* NoiseMeterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMeterWidget.swift; sourceTree = "<group>"; };
 		676430A1320025497149B7E6 /* HistoryGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGraphView.swift; sourceTree = "<group>"; };
 		701337571374CD2A7C5353BE /* GaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
+		743708A75B8313A1E467B402 /* NoiseMeterUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = NoiseMeterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5208CD8E0ABB3873A20EC2D /* NoiseMeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMeterApp.swift; sourceTree = "<group>"; };
 		AD426CBD674805599319A49C /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		CF08051BEB26ED5BA5CAC531 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D353CE8E4F7181B2591974E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D53FFE50DE03B8D14EB10156 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
 		D6F4AB429CC46F2CE0DDAC9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E05F720F7348099DA39D13CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				258BA8EE76F2CE95132FD060 /* NoiseMeter.app */,
+				743708A75B8313A1E467B402 /* NoiseMeterUITests.xctest */,
 				2E737F433AB08973DCA48357 /* NoiseMeterWidgetExtension.appex */,
 			);
 			name = Products;
@@ -99,14 +112,24 @@
 				701337571374CD2A7C5353BE /* GaugeView.swift */,
 				676430A1320025497149B7E6 /* HistoryGraphView.swift */,
 				1E3F514D0C68D7D858B2AD04 /* SessionHistoryView.swift */,
+				0A488C2C48A983C61618FB1A /* StatisticsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A68F2D67D2B02BD0DE0D4945 /* NoiseMeterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D53FFE50DE03B8D14EB10156 /* ScreenshotTests.swift */,
+			);
+			path = NoiseMeterUITests;
 			sourceTree = "<group>";
 		};
 		C5F17090B9DBC62939938785 = {
 			isa = PBXGroup;
 			children = (
 				E852F18207918D37BEDA816F /* NoiseMeter */,
+				A68F2D67D2B02BD0DE0D4945 /* NoiseMeterUITests */,
 				E768CE19518E05AAFFD46C61 /* NoiseMeterWidget */,
 				4F214254EC36E4C90576E72F /* Sources */,
 				8C77B255C1B12C262C91B218 /* Products */,
@@ -143,6 +166,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		80FD710F4530572EEB1AEA48 /* NoiseMeterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38D920AA593F37E8B62853D8 /* Build configuration list for PBXNativeTarget "NoiseMeterUITests" */;
+			buildPhases = (
+				AB6CDCA8D76162235DC026F1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92DF48ABFD08777FEFAAD5EA /* PBXTargetDependency */,
+			);
+			name = NoiseMeterUITests;
+			packageProductDependencies = (
+			);
+			productName = NoiseMeterUITests;
+			productReference = 743708A75B8313A1E467B402 /* NoiseMeterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		8C43D5F87F5C5D30B7812BBE /* NoiseMeter */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4B8176E8586B68EA9F2BF9F /* Build configuration list for PBXNativeTarget "NoiseMeter" */;
@@ -190,6 +231,11 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					80FD710F4530572EEB1AEA48 = {
+						DevelopmentTeam = BAMVK6LBVP;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8C43D5F87F5C5D30B7812BBE;
+					};
 					8C43D5F87F5C5D30B7812BBE = {
 						DevelopmentTeam = BAMVK6LBVP;
 						ProvisioningStyle = Automatic;
@@ -215,6 +261,7 @@
 			projectRoot = "";
 			targets = (
 				8C43D5F87F5C5D30B7812BBE /* NoiseMeter */,
+				80FD710F4530572EEB1AEA48 /* NoiseMeterUITests */,
 				F325E73284119C812DCEBA30 /* NoiseMeterWidgetExtension */,
 			);
 		};
@@ -260,6 +307,15 @@
 				9043AF65A910A1A81D63E65F /* HistoryGraphView.swift in Sources */,
 				76A8177908BC4EE497502900 /* NoiseMeterApp.swift in Sources */,
 				77902FAB236A3A06B6274FDC /* SessionHistoryView.swift in Sources */,
+				B6DA4761E80AC8C14D68A751 /* StatisticsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6CDCA8D76162235DC026F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE5794465AB5D9808A444D95 /* ScreenshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,16 +327,39 @@
 			target = F325E73284119C812DCEBA30 /* NoiseMeterWidgetExtension */;
 			targetProxy = D334D5B81DB580B55EA67E0D /* PBXContainerItemProxy */;
 		};
+		92DF48ABFD08777FEFAAD5EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C43D5F87F5C5D30B7812BBE /* NoiseMeter */;
+			targetProxy = 0E8B7CE9D042D2318ADB0F86 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		03DF2D6C3473B18A081831C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NoiseMeter;
+			};
+			name = Release;
+		};
 		37AC42D7132280F8F1B190BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 260101;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NoiseMeter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -351,11 +430,29 @@
 			};
 			name = Release;
 		};
+		5E5BE9C7B924A45488179ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.noisemeter.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NoiseMeter;
+			};
+			name = Debug;
+		};
 		654AA61C924153C2807A52AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 260101;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NoiseMeterWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -373,7 +470,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 260101;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NoiseMeter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,7 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 260101;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NoiseMeterWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -470,6 +567,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		38D920AA593F37E8B62853D8 /* Build configuration list for PBXNativeTarget "NoiseMeterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E5BE9C7B924A45488179ABE /* Debug */,
+				03DF2D6C3473B18A081831C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		7C86E2C9DC2E41F024E781F0 /* Build configuration list for PBXProject "NoiseMeter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

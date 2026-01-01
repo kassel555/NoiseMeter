@@ -4,6 +4,8 @@
 <dict>
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Noise Meter</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -17,25 +19,21 @@
     <key>CFBundleShortVersionString</key>
     <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
-    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <string>260101</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSMicrophoneUsageDescription</key>
-    <string>NoiseMeter needs access to your microphone to measure ambient noise levels in decibels.</string>
+    <string>NoiseMeter needs microphone access to measure ambient noise levels. Audio is processed locally and never recorded or transmitted.</string>
     <key>UIApplicationSceneManifest</key>
     <dict>
         <key>UIApplicationSupportsMultipleScenes</key>
-        <false/>
+        <true/>
     </dict>
     <key>UILaunchScreen</key>
-    <dict>
-        <key>UIColorName</key>
-        <string>LaunchScreenColor</string>
-    </dict>
+    <dict/>
     <key>UIRequiredDeviceCapabilities</key>
     <array>
         <string>armv7</string>
-        <string>microphone</string>
     </array>
     <key>UISupportedInterfaceOrientations</key>
     <array>

@@ -48,3 +48,16 @@ targets:
         GENERATE_INFOPLIST_FILE: false
         SKIP_INSTALL: true
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"
+
+  NoiseMeterUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - NoiseMeterUITests
+    dependencies:
+      - target: NoiseMeter
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.noisemeter.app.uitests
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: true

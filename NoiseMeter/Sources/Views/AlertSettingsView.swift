@@ -5,19 +5,47 @@ struct AlertSettingsView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section {
-                    Toggle("Enable Alerts", isOn: $audioManager.alertEnabled)
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
 
-                    if audioManager.alertEnabled {
+                ScrollView {
+                    VStack(spacing: 24) {
+                        // Enable toggle
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Noise Alerts")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+
+                                Text("Get haptic feedback when noise exceeds threshold")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+
+                            Spacer()
+
+                            Toggle("", isOn: $audioManager.alertEnabled)
+                                .labelsHidden()
+                                .tint(.orange)
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.05))
+                        .cornerRadius(12)
+
+                        // Threshold slider
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
-                                Text("Threshold")
+                                Text("Alert Threshold")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+
                                 Spacer()
+
                                 Text("\(Int(audioManager.alertThreshold)) dB")
-                                    .foregroundColor(.secondary)
-                                    .monospacedDigit()
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(colorForLevel(audioManager.alertThreshold))
                             }
 
                             Slider(
@@ -25,121 +53,98 @@ struct AlertSettingsView: View {
                                 in: 50...110,
                                 step: 5
                             )
-                            .tint(colorForThreshold(audioManager.alertThreshold))
+                            .tint(colorForLevel(audioManager.alertThreshold))
 
                             HStack {
                                 Text("50 dB")
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
                                 Spacer()
                                 Text("110 dB")
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
                             }
                         }
-                        .padding(.vertical, 8)
-                    }
-                } header: {
-                    Text("Alert Settings")
-                } footer: {
-                    Text("You'll receive haptic feedback when noise exceeds the threshold.")
-                }
+                        .padding()
+                        .background(Color.white.opacity(0.05))
+                        .cornerRadius(12)
+                        .opacity(audioManager.alertEnabled ? 1 : 0.5)
+                        .disabled(!audioManager.alertEnabled)
 
-                Section("Reference Levels") {
-                    ReferenceLevelRow(name: "Whisper", level: "30 dB", icon: "speaker.wave.1")
-                    ReferenceLevelRow(name: "Normal conversation", level: "60 dB", icon: "speaker.wave.2")
-                    ReferenceLevelRow(name: "Vacuum cleaner", level: "75 dB", icon: "speaker.wave.3")
-                    ReferenceLevelRow(name: "Heavy traffic", level: "85 dB", icon: "car.fill")
-                    ReferenceLevelRow(name: "Concert", level: "100 dB", icon: "music.note")
-                    ReferenceLevelRow(name: "Jet engine", level: "120 dB", icon: "airplane")
+                        // Reference levels
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Reference Levels")
+                                .font(.headline)
+                                .foregroundColor(.white)
+
+                            VStack(spacing: 8) {
+                                ReferenceLevelRow(name: "Library", level: 30, color: .green)
+                                ReferenceLevelRow(name: "Normal conversation", level: 60, color: .yellow)
+                                ReferenceLevelRow(name: "Busy traffic", level: 70, color: .orange)
+                                ReferenceLevelRow(name: "Lawn mower", level: 85, color: .red)
+                                ReferenceLevelRow(name: "Rock concert", level: 100, color: .purple)
+                                ReferenceLevelRow(name: "Jet engine", level: 120, color: .purple)
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.05))
+                        .cornerRadius(12)
+
+                        Spacer()
+                    }
+                    .padding()
                 }
             }
             .navigationTitle("Alert Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
+                    .foregroundColor(.orange)
                 }
             }
         }
+        .preferredColorScheme(.dark)
     }
 
-    private func colorForThreshold(_ threshold: Float) -> Color {
-        switch threshold {
-        case 0..<60:
+    private func colorForLevel(_ db: Float) -> Color {
+        switch db {
+        case 0..<30:
             return .green
-        case 60..<80:
+        case 30..<50:
             return .yellow
-        case 80..<100:
+        case 50..<70:
             return .orange
-        default:
+        case 70..<90:
             return .red
+        default:
+            return .purple
         }
     }
 }
 
 struct ReferenceLevelRow: View {
     let name: String
-    let level: String
-    let icon: String
+    let level: Int
+    let color: Color
 
     var body: some View {
         HStack {
-            Image(systemName: icon)
-                .foregroundColor(.secondary)
-                .frame(width: 24)
+            Circle()
+                .fill(color)
+                .frame(width: 8, height: 8)
 
             Text(name)
-
-            Spacer()
-
-            Text(level)
-                .foregroundColor(.secondary)
-                .monospacedDigit()
-        }
-    }
-}
-
-struct AlertBanner: View {
-    let threshold: Float
-    let alertCount: Int
-    let isTriggered: Bool
-
-    var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: isTriggered ? "speaker.wave.3.fill" : "bell.fill")
-                .font(.title2)
                 .foregroundColor(.white)
-                .symbolEffect(.bounce, value: isTriggered)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(isTriggered ? "TOO LOUD!" : "Alert Active")
-                    .font(.headline)
-                    .foregroundColor(.white)
-
-                Text("Threshold: \(Int(threshold)) dB")
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.8))
-            }
 
             Spacer()
 
-            if alertCount > 0 {
-                Text("\(alertCount)")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: 40, height: 40)
-                    .background(Color.white.opacity(0.2))
-                    .clipShape(Circle())
-            }
+            Text("\(level) dB")
+                .foregroundColor(.gray)
+                .fontWeight(.medium)
         }
-        .padding()
-        .background(isTriggered ? Color.red : Color.orange)
-        .cornerRadius(16)
-        .animation(.easeInOut(duration: 0.2), value: isTriggered)
     }
 }
 
